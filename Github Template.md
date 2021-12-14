@@ -1,7 +1,7 @@
-Title
-Naming convention
-[ What you’re doing ]       [ What system its on ]        [ What the document is ]
-Ex: Hardening	Cisco router		CLI commands
+Title /
+Naming convention /
+[ What you’re doing ]       [ What system its on ]        [ What the document is ] /
+Ex: Hardening	Cisco router		CLI commands /
 Ex: Grant user permissions	Windows	Powershell commands
 
 
