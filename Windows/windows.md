@@ -74,4 +74,6 @@ Member removed group: wevtutil qe Security "/q:*[System [(EventID=4733)]]" /f:te
 
 Service installed: wevtutil qe System "/q:*[System [(EventID=7045)]]" /f:text /c:1 
 
- 
+ Install Sysmon 
+
+ Install: sysmon64 -i -h md5 –l –n 
