@@ -13,6 +13,7 @@ Fix Text: Configure the policy value for Computer Configuration -> Windows Setti
 System\CurrentControlSet\Control\ProductOptions 
 System\CurrentControlSet\Control\Server Applications 
 Software\Microsoft\Windows NT\CurrentVersion
+
 Fix Text: Configure the policy value for Computer Configuration -> Windows Settings -> Security Settings -> Local Policies -> Security Options -> "Network access: Restrict anonymous access to Named Pipes and Shares" to "Enabled".
 Fix Text: Ensure the policy value for Computer Configuration -> Windows Settings -> Security Settings -> Local Policies -> Security Options -> "Network access: Shares that can be accessed anonymously" contains no entries (blank).
 Fix Text: Configure the policy value for Computer Configuration -> Windows Settings -> Security Settings -> Local Policies -> Security Options -> "Network security: Do not store LAN Manager hash value on next password change" to "Enabled".
@@ -32,3 +33,45 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\Installer\" /v "AlwaysInstallE
 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\" /v "SMB1" /t REG_DWORD /d 0 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\mrxsmb10\" /v "Start" /t REG_DWORD /d 4 /f
+
+Auditlist: 
+
+auditpol /set /subcategory:"logon" /Success:Enable /Failure:Enable 
+
+auditpol /set /subcategory:"logon" /Success:Enable /Failure:Enable 
+
+auditpol /set /subcategory:"logoff" /Success:Enable /Failure:Enable 
+
+auditpol /set /subcategory:"computer account management" /Success:Enable /Failure:Enable 
+
+auditpol /set /subcategory:"computer account management" /Success:Enable /Failure:Enable 
+
+auditpol /set /subcategory:"computer account management" /Success:Enable /Failure:Enable 
+
+auditpol /set /subcategory:"security group management" /Success:Enable /Failure:Enable 
+
+ See these audits in Event Viewer 
+
+ 
+
+View Logs 
+
+Logons: wevtutil qe Security "/q:*[System [(EventID=4624)]]" /f:text /c:1 
+
+Failed logons: wevtutil qe Security "/q:*[System [(EventID=4625)]]" /f:text /c:1 
+
+Account created: wevtutil qe Security "/q:*[System [(EventID=4720)]]" /f:text /c:1 
+
+Account deleted: wevtutil qe Security "/q:*[System [(EventID=4726)]]" /f:text /c:1 
+
+Account changed: wevtutil qe Security "/q:*[System [(EventID=4738)]]" /f:text /c:1 
+
+Software installed: wevtutil qe Application "/q:*[System [(EventID=11707)]]" /f:text /c:1 
+
+Member added to group: wevtutil qe Security "/q:*[System [(EventID=4732)]]" /f:text /c:1 
+
+Member removed group: wevtutil qe Security "/q:*[System [(EventID=4733)]]" /f:text /c:1 
+
+Service installed: wevtutil qe System "/q:*[System [(EventID=7045)]]" /f:text /c:1 
+
+ 
